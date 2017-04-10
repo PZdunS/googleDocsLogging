@@ -75,6 +75,7 @@ def childStartPage() {
         }
     
         section("Log Other Devices") {
+            input "voltage", "capability.motionSensor", title: "Battery Voltage", required: false, multiple: true
             input "temperatures", "capability.temperatureMeasurement", title: "Temperatures", required: false, multiple: true
             input "humidities", "capability.relativeHumidityMeasurement", title: "Humidity Sensors", required: false, multiple: true
             input "illuminances", "capability.illuminanceMeasurement", title: "Illuminance Sensors", required: false, multiple: true
@@ -143,6 +144,7 @@ def initChild() {
     
     unsubscribe()
     
+    subscribe(voltage, "batteryVoltage", handleNumberEvent)
     subscribe(locks, "lock", handleLockEvent)
     subscribe(batteries, "battery", handleNumberEvent)
     subscribe(contacts, "contact", handleContactEvent)
